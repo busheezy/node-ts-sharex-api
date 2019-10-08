@@ -36,7 +36,7 @@ router.post('/api/links', apiKeyMiddleware, bodyParser, async ctx => {
     await trx.commit();
 
     ctx.body = {
-      url: randomString(),
+      url: stringId,
       delete: deleteUrl,
     };
   } catch (err) {

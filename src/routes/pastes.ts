@@ -1,6 +1,5 @@
 import Router from 'koa-router';
 import BodyParser from 'koa-body';
-import path from 'path';
 import fs from 'fs-extra';
 import { transaction } from 'objection';
 
@@ -30,10 +29,7 @@ router.post('/api/pastes', apiKeyMiddleware, bodyParser, async ctx => {
     const fileConentsBuffer = await fs.readFile(paste.path);
     const fileContents = fileConentsBuffer.toString();
 
-    const extension = path.extname(paste.name);
-
     const stringId = randomString();
-    const fileName = `${stringId}${extension}`;
 
     const trx = await transaction.start(knex);
 
@@ -53,7 +49,7 @@ router.post('/api/pastes', apiKeyMiddleware, bodyParser, async ctx => {
     await trx.commit();
 
     ctx.body = {
-      url: fileName,
+      url: stringId,
       delete: deleteUrl,
     };
   } catch (err) {

@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 import sharp from 'sharp';
 import { transaction } from 'objection';
 
-import cryptoRandomString from 'crypto-random-string';
+import randomString from '../randomString';
 
 import apiKeyMiddleware from '../middleware/apiKey';
 
@@ -17,10 +17,6 @@ import knex from '../knex';
 type Files = import('formidable').Files;
 
 const router = new Router();
-
-function randomString(): string {
-  return cryptoRandomString({ length: 6, type: 'url-safe' });
-}
 
 const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'images');
 

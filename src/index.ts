@@ -18,17 +18,19 @@ const app = new Koa();
 const isDev = process.env.NODE_ENV !== 'production';
 
 if (isDev) {
-  app.use(serve(path.join(__dirname, '..', 'public', 'images')));
-  app.use(serve(path.join(__dirname, '..', 'public', 'files')));
+  app.use(serve(path.join(__dirname, '..', 'public')));
+
+  app.use(serve(path.join(__dirname, '..', 'uploads', 'images')));
+  app.use(serve(path.join(__dirname, '..', 'uploads', 'files')));
 
   app.use(
     mount(
       '/thumbnails',
-      serve(path.join(__dirname, '..', 'public', 'thumbnails')),
+      serve(path.join(__dirname, '..', 'uploads', 'thumbnails')),
     ),
   );
 
-  app.use(mount('/css', serve(path.join(__dirname, '..', 'public', 'css'))));
+  app.use(mount('/css', serve(path.join(__dirname, '..', 'uploads', 'css'))));
 }
 
 app.use(routes.routes());

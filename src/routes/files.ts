@@ -17,7 +17,7 @@ type Files = import('formidable').Files;
 
 const router = new Router();
 
-const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'files');
+const uploadDir = path.resolve(__dirname, '..', '..', 'uploads', 'files');
 
 const bodyParser = BodyParser({
   multipart: true,

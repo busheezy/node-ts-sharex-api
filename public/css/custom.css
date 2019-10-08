@@ -1,0 +1,16 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #3d3d3d;
+}
+
+.container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #2d2d2d;
+  margin-top: 20px;
+}

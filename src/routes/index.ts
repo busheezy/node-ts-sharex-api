@@ -36,11 +36,11 @@ router.get('/:stringId/:option*', async ctx => {
   if (share) {
     if (share.file) {
       await send(ctx, share.file.fileName!, {
-        root: path.join(__dirname, '..', '..', 'public', 'files'),
+        root: path.join(__dirname, '..', '..', 'uploads', 'files'),
       });
     } else if (share.image) {
       await send(ctx, share.image.fileName!, {
-        root: path.join(__dirname, '..', '..', 'public', 'images'),
+        root: path.join(__dirname, '..', '..', 'uploads', 'images'),
       });
     } else if (share.link) {
       ctx.redirect(share.link.url!);

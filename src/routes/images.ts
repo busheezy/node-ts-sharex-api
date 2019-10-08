@@ -18,7 +18,7 @@ type Files = import('formidable').Files;
 
 const router = new Router();
 
-const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'images');
+const uploadDir = path.resolve(__dirname, '..', '..', 'uploads', 'images');
 
 const bodyParser = BodyParser({
   multipart: true,
@@ -43,7 +43,7 @@ router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
     const fileName = `${stringId}${extension}`;
 
     await fs.writeFile(
-      path.resolve(__dirname, '..', '..', 'public', 'thumbnails', fileName),
+      path.resolve(__dirname, '..', '..', 'uploads', 'thumbnails', fileName),
       thumbnail,
     );
 

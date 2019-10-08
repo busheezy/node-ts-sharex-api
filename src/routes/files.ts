@@ -2,14 +2,13 @@ import Router from 'koa-router';
 import BodyParser from 'koa-body';
 import path from 'path';
 import fs from 'fs-extra';
-import sharp from 'sharp';
 import { transaction } from 'objection';
 
 import randomString from '../randomString';
 
 import apiKeyMiddleware from '../middleware/apiKey';
 
-import Image from '../models/Image';
+import File from '../models/File';
 import Share from '../models/Share';
 
 import knex from '../knex';
@@ -18,7 +17,7 @@ type Files = import('formidable').Files;
 
 const router = new Router();
 
-const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'images');
+const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'files');
 
 const bodyParser = BodyParser({
   multipart: true,
@@ -27,29 +26,20 @@ const bodyParser = BodyParser({
   },
 });
 
-router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
+router.post('/api/files', apiKeyMiddleware, bodyParser, async ctx => {
   try {
     const files = ctx.request.files as Files;
 
-    const { image } = files;
+    const { file } = files;
 
-    const thumbnail = await sharp(image.path)
-      .resize(64)
-      .toBuffer();
-
-    const extension = path.extname(image.name);
+    const extension = path.extname(file.name);
 
     const stringId = randomString();
     const fileName = `${stringId}${extension}`;
 
-    await fs.writeFile(
-      path.resolve(__dirname, '..', '..', 'public', 'thumbnails', fileName),
-      thumbnail,
-    );
-
     const fileNamePath = path.join(uploadDir, fileName);
 
-    await fs.rename(image.path, fileNamePath);
+    await fs.rename(file.path, fileNamePath);
 
     const trx = await transaction.start(knex);
 
@@ -61,20 +51,19 @@ router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
       stringId,
     });
 
-    await share.$relatedQuery<Image>('image', trx).insert({
+    await share.$relatedQuery<File>('file', trx).insert({
       fileName,
-      type: image.type,
+      type: file.type,
     });
 
     await trx.commit();
 
     ctx.body = {
       url: fileName,
-      thumbnail: `/thumbnail/${fileName}`,
       delete: deleteUrl,
     };
   } catch (err) {
-    console.error('failed to upload image');
+    console.error('failed to upload file');
     console.error(err);
 
     ctx.status = 500;

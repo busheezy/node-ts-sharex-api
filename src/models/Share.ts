@@ -6,6 +6,8 @@ class Share extends Model {
 
   readonly id!: number;
 
+  stringId?: string;
+
   deleteUrl?: string;
 
   deleteKey?: string;

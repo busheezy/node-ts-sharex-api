@@ -8,6 +8,8 @@ class File extends Model {
 
   fileName?: string;
 
+  type?: string;
+
   static relationMappings = {
     share: {
       relation: Model.HasOneRelation,

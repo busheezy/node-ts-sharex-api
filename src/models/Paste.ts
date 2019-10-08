@@ -6,6 +6,10 @@ class Paste extends Model {
 
   readonly id!: number;
 
+  content?: string;
+
+  type?: string;
+
   static relationMappings = {
     share: {
       relation: Model.HasOneRelation,

@@ -3,6 +3,7 @@ exports.up = knex => {
     .createTable('files', table => {
       table.increments('id').primary();
       table.string('fileName', 255).notNullable();
+      table.string('type', 255).notNullable();
     })
     .createTable('images', table => {
       table.increments('id').primary();
@@ -16,9 +17,12 @@ exports.up = knex => {
     .createTable('pastes', table => {
       table.increments('id').primary();
       table.text('content').notNullable();
+      table.string('type', 255).notNullable();
     })
     .createTable('shares', table => {
       table.increments('id').primary();
+
+      table.string('stringId', 255).notNullable();
 
       table.string('deleteUrl', 255).notNullable();
       table.string('deleteKey', 255).notNullable();

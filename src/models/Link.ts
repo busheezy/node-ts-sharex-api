@@ -6,6 +6,8 @@ class Link extends Model {
 
   readonly id!: number;
 
+  url?: string;
+
   static relationMappings = {
     share: {
       relation: Model.HasOneRelation,

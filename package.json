@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.5",
+    "crypto-random-string": "^3.0.1",
     "dotenv": "^8.1.0",
     "fs-extra": "^8.1.0",
     "knex": "^0.19.4",

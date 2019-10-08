@@ -3,48 +3,81 @@ import BodyParser from 'koa-body';
 import path from 'path';
 import fs from 'fs-extra';
 import sharp from 'sharp';
+import { transaction } from 'objection';
+
+import cryptoRandomString from 'crypto-random-string';
+
 import apiKeyMiddleware from '../middleware/apiKey';
+
+import Image from '../models/Image';
+import Share from '../models/Share';
+
+import knex from '../knex';
 
 type Files = import('formidable').Files;
 
 const router = new Router();
 
+function randomString(): string {
+  return cryptoRandomString({ length: 6, type: 'url-safe' });
+}
+
+const uploadDir = path.resolve(__dirname, '..', '..', 'public', 'images');
+
 const bodyParser = BodyParser({
   multipart: true,
   formidable: {
-    uploadDir: path.resolve(__dirname, '..', '..', 'public', 'images'),
-    keepExtensions: true,
+    uploadDir,
   },
 });
 
 router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
   const files = ctx.request.files as Files;
 
-  const imagePath = files.image.path;
+  const { image } = files;
 
-  const thumbnail = await sharp(imagePath)
+  const thumbnail = await sharp(image.path)
     .resize(64)
     .toBuffer();
 
   const extension = path.extname(files.image.name);
 
+  const fileName = `${randomString()}${extension}`;
+
   await fs.writeFile(
-    path.resolve(
-      __dirname,
-      '..',
-      '..',
-      'public',
-      'thumbnails',
-      `test${extension}`,
-    ),
+    path.resolve(__dirname, '..', '..', 'public', 'thumbnails', fileName),
     thumbnail,
   );
 
-  ctx.body = {
-    url: 'test1',
-    thumbnail: 'test2',
-    delete: 'test3',
-  };
+  const fileNamePath = path.join(uploadDir, fileName);
+
+  await fs.rename(image.path, fileNamePath);
+
+  try {
+    const trx = await transaction.start(knex);
+
+    const deleteUrl = randomString();
+
+    const share = await Share.query(trx).insert({
+      deleteUrl,
+      deleteKey: randomString(),
+    });
+
+    await share.$relatedQuery<Image>('image', trx).insert({
+      fileName,
+      type: image.type,
+    });
+
+    await trx.commit();
+
+    ctx.body = {
+      url: fileName,
+      thumbnail: `/thumbnail/${fileName}`,
+      delete: deleteUrl,
+    };
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 export default router;

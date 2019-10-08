@@ -1,12 +1,21 @@
 import { Model } from 'objection';
-//import path from 'path';
+import path from 'path';
 
 class Paste extends Model {
   static tableName = 'pastes';
 
-  static get relationMappings() {
-    return {};
-  }
+  readonly id!: number;
+
+  static relationMappings = {
+    share: {
+      relation: Model.HasOneRelation,
+      modelClass: path.join(__dirname, 'Share'),
+      join: {
+        from: 'pastes.id',
+        to: 'shares.pasteId',
+      },
+    },
+  };
 }
 
-module.exports = Paste;
+export default Paste;

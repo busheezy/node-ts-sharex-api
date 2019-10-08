@@ -1,12 +1,23 @@
 import { Model } from 'objection';
-//import path from 'path';
+import path from 'path';
 
 class File extends Model {
   static tableName = 'files';
 
-  static get relationMappings() {
-    return {};
-  }
+  readonly id!: number;
+
+  fileName?: string;
+
+  static relationMappings = {
+    share: {
+      relation: Model.HasOneRelation,
+      modelClass: path.join(__dirname, 'Share'),
+      join: {
+        from: 'files.id',
+        to: 'shares.fileId',
+      },
+    },
+  };
 }
 
-module.exports = File;
+export default File;

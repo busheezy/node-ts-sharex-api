@@ -1,12 +1,21 @@
 import { Model } from 'objection';
-//import path from 'path';
+import path from 'path';
 
 class Link extends Model {
   static tableName = 'links';
 
-  static get relationMappings() {
-    return {};
-  }
+  readonly id!: number;
+
+  static relationMappings = {
+    share: {
+      relation: Model.HasOneRelation,
+      modelClass: path.join(__dirname, 'Share'),
+      join: {
+        from: 'links.id',
+        to: 'shares.linkId',
+      },
+    },
+  };
 }
 
-module.exports = Link;
+export default Link;

@@ -2,22 +2,26 @@ exports.up = knex => {
   return knex.schema
     .createTable('files', table => {
       table.increments('id').primary();
-      table.string('fileId', 255);
+      table.string('fileName', 255).notNullable();
     })
     .createTable('images', table => {
       table.increments('id').primary();
-      table.string('fileId', 255);
+      table.string('fileName', 255).notNullable();
+      table.string('type', 255).notNullable();
     })
     .createTable('links', table => {
       table.increments('id').primary();
-      table.string('url', 255);
+      table.string('url', 255).notNullable();
     })
     .createTable('pastes', table => {
       table.increments('id').primary();
-      table.text('content');
+      table.text('content').notNullable();
     })
     .createTable('shares', table => {
       table.increments('id').primary();
+
+      table.string('deleteUrl', 255).notNullable();
+      table.string('deleteKey', 255).notNullable();
 
       table
         .integer('fileId')

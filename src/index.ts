@@ -27,6 +27,8 @@ if (isDev) {
       serve(path.join(__dirname, '..', 'public', 'thumbnails')),
     ),
   );
+
+  app.use(mount('/css', serve(path.join(__dirname, '..', 'public', 'css'))));
 }
 
 app.use(routes.routes());

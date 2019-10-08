@@ -4,7 +4,14 @@ import Router from 'koa-router';
 
 import send from 'koa-send';
 import path from 'path';
+import fs from 'fs-extra';
+import _ from 'lodash';
+import Prism from 'prismjs';
 import Share from '../models/Share';
+
+const templateText = fs.readFileSync(
+  path.join(__dirname, '..', '..', 'highlight.html'),
+);
 
 const router = new Router();
 
@@ -12,8 +19,8 @@ router.get('/', ctx => {
   ctx.body = '<a href="https://github.com/busheezy/ts-sharex-api">GitHub</a>';
 });
 
-router.get('/:stringId', async ctx => {
-  const { stringId } = ctx.params;
+router.get('/:stringId/:option*', async ctx => {
+  const { stringId, option } = ctx.params;
 
   const share = await Share.query()
     .eager({
@@ -38,7 +45,26 @@ router.get('/:stringId', async ctx => {
     } else if (share.link) {
       ctx.redirect(share.link.url!);
     } else if (share.paste) {
-      ctx.body = share.paste.content;
+      if (option) {
+        if (!Prism.languages[option]) {
+          ctx.body =
+            'language not found https://prismjs.com/index.html#supported-languages';
+          ctx.status = 500;
+          return;
+        }
+        const html = Prism.highlight(
+          share.paste.content!,
+          Prism.languages[option],
+          option,
+        );
+        const compileTemplate = _.template(templateText.toString());
+        const compiledTemplate = compileTemplate({
+          body: html,
+        });
+        ctx.body = compiledTemplate;
+      } else {
+        ctx.body = share.paste.content;
+      }
     } else {
       ctx.body = share;
       ctx.status = 500;

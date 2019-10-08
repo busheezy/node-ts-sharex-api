@@ -27,6 +27,7 @@
     "lodash": "^4.17.15",
     "mysql2": "^1.7.0",
     "objection": "^1.6.11",
+    "prismjs": "^1.17.1",
     "sharp": "^0.23.1"
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
     "@types/koa-send": "^4.1.2",
     "@types/koa-static": "^4.0.1",
     "@types/lodash": "^4.14.141",
+    "@types/prismjs": "^1.16.0",
     "@types/sharp": "^0.22.3",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",

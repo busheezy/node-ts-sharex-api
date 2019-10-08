@@ -1,6 +1,11 @@
 import { Model } from 'objection';
 import path from 'path';
 
+import File from './File';
+import Image from './Image';
+import Link from './Link';
+import Paste from './Paste';
+
 class Share extends Model {
   static tableName = 'shares';
 
@@ -11,6 +16,22 @@ class Share extends Model {
   deleteUrl?: string;
 
   deleteKey?: string;
+
+  fileId?: number;
+
+  imageId?: number;
+
+  linkId?: number;
+
+  pasteId?: number;
+
+  file?: File;
+
+  image?: Image;
+
+  link?: Link;
+
+  paste?: Paste;
 
   static relationMappings = {
     file: {
@@ -25,7 +46,7 @@ class Share extends Model {
       relation: Model.BelongsToOneRelation,
       modelClass: path.join(__dirname, 'Image'),
       join: {
-        from: 'shares.imageid',
+        from: 'shares.imageId',
         to: 'images.id',
       },
     },

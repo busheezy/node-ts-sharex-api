@@ -24,7 +24,11 @@ const bodyParser = BodyParser({
   multipart: true,
   formidable: {
     uploadDir,
+    maxFieldsSize: 1024 * 1024 * 1024,
   },
+  jsonLimit: '1gb',
+  formLimit: '1gb',
+  textLimit: '1gb',
 });
 
 router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {

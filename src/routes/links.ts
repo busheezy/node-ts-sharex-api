@@ -13,7 +13,14 @@ import knex from '../knex';
 
 const router = new Router();
 
-const bodyParser = BodyParser();
+const bodyParser = BodyParser({
+  formidable: {
+    maxFieldsSize: 1024 * 1024 * 1024,
+  },
+  jsonLimit: '1gb',
+  formLimit: '1gb',
+  textLimit: '1gb',
+});
 
 router.post('/api/links', apiKeyMiddleware, bodyParser, async ctx => {
   try {

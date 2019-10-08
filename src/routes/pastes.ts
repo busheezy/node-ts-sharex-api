@@ -18,6 +18,12 @@ const router = new Router();
 
 const bodyParser = BodyParser({
   multipart: true,
+  formidable: {
+    maxFieldsSize: 1024 * 1024 * 1024,
+  },
+  jsonLimit: '1gb',
+  formLimit: '1gb',
+  textLimit: '1gb',
 });
 
 router.post('/api/pastes', apiKeyMiddleware, bodyParser, async ctx => {

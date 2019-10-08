@@ -11,6 +11,7 @@ import routesImages from './routes/images';
 import routesFiles from './routes/files';
 import routesPastes from './routes/pastes';
 import routesLinks from './routes/links';
+import routesLinkShare from './routes/linkShare';
 
 const app = new Koa();
 
@@ -33,6 +34,7 @@ app.use(routesImages.routes());
 app.use(routesFiles.routes());
 app.use(routesPastes.routes());
 app.use(routesLinks.routes());
+app.use(routesLinkShare.routes());
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 

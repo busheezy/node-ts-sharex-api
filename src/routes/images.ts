@@ -28,28 +28,28 @@ const bodyParser = BodyParser({
 });
 
 router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
-  const files = ctx.request.files as Files;
-
-  const { image } = files;
-
-  const thumbnail = await sharp(image.path)
-    .resize(64)
-    .toBuffer();
-
-  const extension = path.extname(files.image.name);
-
-  const fileName = `${randomString()}${extension}`;
-
-  await fs.writeFile(
-    path.resolve(__dirname, '..', '..', 'public', 'thumbnails', fileName),
-    thumbnail,
-  );
-
-  const fileNamePath = path.join(uploadDir, fileName);
-
-  await fs.rename(image.path, fileNamePath);
-
   try {
+    const files = ctx.request.files as Files;
+
+    const { image } = files;
+
+    const thumbnail = await sharp(image.path)
+      .resize(64)
+      .toBuffer();
+
+    const extension = path.extname(files.image.name);
+
+    const fileName = `${randomString()}${extension}`;
+
+    await fs.writeFile(
+      path.resolve(__dirname, '..', '..', 'public', 'thumbnails', fileName),
+      thumbnail,
+    );
+
+    const fileNamePath = path.join(uploadDir, fileName);
+
+    await fs.rename(image.path, fileNamePath);
+
     const trx = await transaction.start(knex);
 
     const deleteUrl = randomString();
@@ -72,7 +72,11 @@ router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
       delete: deleteUrl,
     };
   } catch (err) {
+    console.error('failed to upload image');
     console.error(err);
+
+    ctx.status = 500;
+    ctx.body = 'error';
   }
 });
 

@@ -32,13 +32,12 @@ router.post('/api/files', apiKeyMiddleware, bodyParser, async ctx => {
 
     const { file } = files;
 
-    const extension = path.extname(file.name);
-
     const stringId = randomString();
-    const fileName = `${stringId}${extension}`;
 
-    const fileNamePath = path.join(uploadDir, fileName);
+    const folderPath = path.join(uploadDir, stringId);
+    const fileNamePath = path.join(folderPath, file.name);
 
+    await fs.mkdirp(folderPath);
     await fs.rename(file.path, fileNamePath);
 
     const trx = await transaction.start(knex);
@@ -52,14 +51,14 @@ router.post('/api/files', apiKeyMiddleware, bodyParser, async ctx => {
     });
 
     await share.$relatedQuery<File>('file', trx).insert({
-      fileName,
+      fileName: file.name,
       type: file.type,
     });
 
     await trx.commit();
 
     ctx.body = {
-      url: fileName,
+      url: `${stringId}/${file.name}`,
       delete: deleteUrl,
     };
   } catch (err) {

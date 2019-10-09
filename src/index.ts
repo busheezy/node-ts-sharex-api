@@ -41,8 +41,9 @@ app.use(routesLinkShare.routes());
 app.use(routes.routes());
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const host = process.env.HOST || '0.0.0.0';
 
-app.listen(port, () => {
+app.listen(port, host, () => {
   if (process.send) {
     process.send('ready');
   }

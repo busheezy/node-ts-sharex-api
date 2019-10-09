@@ -38,13 +38,19 @@ router.get('/:stringId/:option*', async ctx => {
       await send(ctx, share.file.fileName!, {
         root: path.join(__dirname, '..', '..', 'uploads', 'files'),
       });
-    } else if (share.image) {
+    }
+
+    if (share.image) {
       await send(ctx, share.image.fileName!, {
         root: path.join(__dirname, '..', '..', 'uploads', 'images'),
       });
-    } else if (share.link) {
+    }
+
+    if (share.link) {
       ctx.redirect(share.link.url!);
-    } else if (share.paste) {
+    }
+
+    if (share.paste) {
       if (option) {
         if (!Prism.languages[option]) {
           ctx.body =
@@ -52,22 +58,22 @@ router.get('/:stringId/:option*', async ctx => {
           ctx.status = 500;
           return;
         }
+
         const html = Prism.highlight(
           share.paste.content!,
           Prism.languages[option],
           option,
         );
+
         const compileTemplate = _.template(templateText.toString());
         const compiledTemplate = compileTemplate({
           body: html,
         });
+
         ctx.body = compiledTemplate;
       } else {
         ctx.body = share.paste.content;
       }
-    } else {
-      ctx.body = share;
-      ctx.status = 500;
     }
   } else {
     ctx.body = 'not found';

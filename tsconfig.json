@@ -12,8 +12,8 @@
     "strictNullChecks": true,
     "target": "es6",
     "rootDir": "src",
-    "outDir": "lib",
-    "esModuleInterop": true
+    "outDir": "dist",
+    "esModuleInterop": true,
   },
   "include": [
     "src/**/*"

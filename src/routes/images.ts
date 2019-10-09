@@ -77,7 +77,7 @@ router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
 
     ctx.body = {
       url: fileName,
-      thumbnail: `/thumbnail/${fileName}`,
+      thumbnail: `thumbnails/${fileName}`,
       delete: deleteUrl,
     };
   } catch (err) {

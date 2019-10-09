@@ -15,6 +15,31 @@ const templateText = fs.readFileSync(
 
 const router = new Router();
 
+router.get('/api/delete/:deleteUrl/:deleteKey*', async ctx => {
+  const { deleteUrl, deleteKey } = ctx.params;
+
+  const share = await Share.query().findOne({
+    deleteUrl,
+  });
+
+  if (share) {
+    if (deleteKey) {
+      if (deleteKey === share.deleteKey) {
+        await share.$query().delete();
+        ctx.body = 'deleted';
+      } else {
+        ctx.body = 'wrong key';
+        ctx.status = 403;
+      }
+    } else {
+      ctx.body = share.deleteKey;
+    }
+  } else {
+    ctx.body = 'not found';
+    ctx.status = 404;
+  }
+});
+
 router.get('/', ctx => {
   ctx.body = '<a href="https://github.com/busheezy/ts-sharex-api">GitHub</a>';
 });
@@ -74,31 +99,6 @@ router.get('/:stringId/:option*', async ctx => {
       } else {
         ctx.body = share.paste.content;
       }
-    }
-  } else {
-    ctx.body = 'not found';
-    ctx.status = 404;
-  }
-});
-
-router.get('/api/delete/:deleteUrl/:deleteKey*', async ctx => {
-  const { deleteUrl, deleteKey } = ctx.params;
-
-  const share = await Share.query().findOne({
-    deleteUrl,
-  });
-
-  if (share) {
-    if (deleteKey) {
-      if (deleteKey === share.deleteKey) {
-        await share.$query().delete();
-        ctx.body = 'deleted';
-      } else {
-        ctx.body = 'wrong key';
-        ctx.status = 403;
-      }
-    } else {
-      ctx.body = share.deleteKey;
     }
   } else {
     ctx.body = 'not found';

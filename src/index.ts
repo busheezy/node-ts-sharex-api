@@ -33,12 +33,12 @@ if (isDev) {
   app.use(mount('/css', serve(path.join(__dirname, '..', 'uploads', 'css'))));
 }
 
-app.use(routes.routes());
 app.use(routesImages.routes());
 app.use(routesFiles.routes());
 app.use(routesPastes.routes());
 app.use(routesLinks.routes());
 app.use(routesLinkShare.routes());
+app.use(routes.routes());
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 

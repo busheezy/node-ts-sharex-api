@@ -6,14 +6,7 @@ import apiKeyMiddleware from '../middleware/apiKey';
 
 import '../env';
 
-const bodyParser = BodyParser({
-  formidable: {
-    maxFieldsSize: 1024 * 1024 * 1024,
-  },
-  jsonLimit: '1gb',
-  formLimit: '1gb',
-  textLimit: '1gb',
-});
+const bodyParser = BodyParser();
 
 const webhookURL = process.env.DISCORD_WEBHOOK_URL;
 

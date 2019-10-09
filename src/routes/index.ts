@@ -18,13 +18,55 @@ const router = new Router();
 router.get('/api/delete/:deleteUrl/:deleteKey*', async ctx => {
   const { deleteUrl, deleteKey } = ctx.params;
 
-  const share = await Share.query().findOne({
-    deleteUrl,
-  });
+  const share = await Share.query()
+    .eager({
+      file: true,
+      image: true,
+    })
+    .findOne({
+      deleteUrl,
+    });
 
   if (share) {
     if (deleteKey) {
       if (deleteKey === share.deleteKey) {
+        if (share.image) {
+          await fs.unlink(
+            path.join(
+              __dirname,
+              '..',
+              '..',
+              'uploads',
+              'images',
+              share.image.fileName!,
+            ),
+          );
+
+          await fs.unlink(
+            path.join(
+              __dirname,
+              '..',
+              '..',
+              'uploads',
+              'thumbnails',
+              share.image.fileName!,
+            ),
+          );
+        }
+
+        if (share.file) {
+          await fs.remove(
+            path.join(
+              __dirname,
+              '..',
+              '..',
+              'uploads',
+              'files',
+              share.stringId!,
+            ),
+          );
+        }
+
         await share.$query().delete();
         ctx.body = 'deleted';
       } else {

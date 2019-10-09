@@ -81,7 +81,7 @@ router.get('/:stringId/:option*', async ctx => {
   }
 });
 
-router.get('/delete/:deleteUrl/:deleteKey*', async ctx => {
+router.get('/api/delete/:deleteUrl/:deleteKey*', async ctx => {
   const { deleteUrl, deleteKey } = ctx.params;
 
   const share = await Share.query().findOne({

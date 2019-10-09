@@ -31,7 +31,6 @@ import 'prismjs/components/prism-css-extras';
 import 'prismjs/components/prism-d';
 import 'prismjs/components/prism-dart';
 import 'prismjs/components/prism-diff';
-import 'prismjs/components/prism-django';
 import 'prismjs/components/prism-dns-zone-file';
 import 'prismjs/components/prism-docker';
 import 'prismjs/components/prism-ebnf';

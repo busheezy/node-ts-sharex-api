@@ -1,0 +1,14 @@
+﻿{
+  "Version": "13.0.1",
+  "Name": "Node API - Links",
+  "DestinationType": "URLShortener",
+  "RequestMethod": "POST",
+  "RequestURL": "https://your.url/api/links",
+  "Headers": {
+    "X-API-Key": "hunter1"
+  },
+  "Body": "JSON",
+  "Data": "{\n  \"url\": \"$input$\"\n}",
+  "URL": "https://your.url/$json:url$",
+  "DeletionURL": "https://your.url/$json:delete$"
+}

@@ -1,0 +1,12 @@
+﻿{
+  "Version": "13.0.1",
+  "Name": "Node API - Link Share",
+  "DestinationType": "URLSharingService",
+  "RequestMethod": "POST",
+  "RequestURL": "https://your.url/api/link-share",
+  "Headers": {
+    "X-API-Key": "hunter1"
+  },
+  "Body": "JSON",
+  "Data": "{\n  \"url\": \"$input$\"\n}"
+}

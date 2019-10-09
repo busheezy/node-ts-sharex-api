@@ -1,0 +1,14 @@
+﻿{
+  "Version": "13.0.1",
+  "Name": "Node API - Pastes",
+  "DestinationType": "TextUploader",
+  "RequestMethod": "POST",
+  "RequestURL": "https://your.url/api/pastes",
+  "Headers": {
+    "X-API-Key": "hunter1"
+  },
+  "Body": "MultipartFormData",
+  "FileFormName": "paste",
+  "URL": "https://your.url/$json:url$",
+  "DeletionURL": "https://your.url/$json:delete$"
+}

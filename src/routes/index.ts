@@ -9,6 +9,8 @@ import _ from 'lodash';
 import Prism from 'prismjs';
 import Share from '../models/Share';
 
+import '../components';
+
 const templateText = fs.readFileSync(
   path.join(__dirname, '..', '..', 'highlight.html'),
 );

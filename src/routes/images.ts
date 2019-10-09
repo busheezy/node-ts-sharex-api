@@ -78,7 +78,7 @@ router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
     ctx.body = {
       url: fileName,
       thumbnail: `thumbnails/${fileName}`,
-      delete: deleteUrl,
+      delete: `api/delete/${deleteUrl}`,
     };
   } catch (err) {
     console.error('failed to upload image');

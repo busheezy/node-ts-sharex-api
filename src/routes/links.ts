@@ -44,7 +44,7 @@ router.post('/api/links', apiKeyMiddleware, bodyParser, async ctx => {
 
     ctx.body = {
       url: stringId,
-      delete: deleteUrl,
+      delete: `api/delete/${deleteUrl}`,
     };
   } catch (err) {
     console.error('failed to share link');

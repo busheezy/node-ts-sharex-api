@@ -63,7 +63,7 @@ router.post('/api/files', apiKeyMiddleware, bodyParser, async ctx => {
 
     ctx.body = {
       url: `${stringId}/${file.name}`,
-      delete: deleteUrl,
+      delete: `api/delete/${deleteUrl}`,
     };
   } catch (err) {
     console.error('failed to upload file');

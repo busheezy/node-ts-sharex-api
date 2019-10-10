@@ -94,7 +94,7 @@ Use ShareX like normal.
 ## Syntax Highlighting
 
 - Upload text
-- Append language to highlight as after a forward slash
+- Append forward slash and language
   - ``example.com/abcdef/javascript``
 
 The languages are listed [here](syntax-languages.txt).

@@ -1,10 +1,10 @@
 {
-  "name": "ts-sharex-api",
+  "name": "ts-node-sharex-api",
   "version": "1.0.0",
-  "main": "app.js",
-  "license": "MIT",
+  "main": "dist/index.js",
+  "license": "gpl-3.0",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development ts-node-dev src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "lint": "eslint --ext .ts --ignore-path .gitignore .",

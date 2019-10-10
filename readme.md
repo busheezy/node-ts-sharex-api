@@ -1,4 +1,4 @@
-# TypeScript Node ShareX API
+# Node TypeScript ShareX API
 
 This is a Node.js API for ShareX. This is ideal if you want to use ShareX with your own server and domain.
 

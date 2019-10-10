@@ -1,5 +1,5 @@
 {
-  "name": "ts-node-sharex-api",
+  "name": "node-ts-sharex-api",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "gpl-3.0",

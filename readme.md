@@ -84,7 +84,7 @@ Edit the request and response tab for every configuration to reflect your domain
 ### pm2
 
 ```bash
-pm2 start
+pm2 start --env production
 ```
 
 or

@@ -8,7 +8,7 @@ This is a Node.js API for ShareX. This is ideal if you want to use ShareX with y
 - Thumbnail support
 - Deletion URL support
 - Syntax highlighting
-- Discord Logging
+- Discord Logging (optional)
 
 ## Requirements
 

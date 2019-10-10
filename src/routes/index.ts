@@ -11,6 +11,14 @@ import Share from '../models/Share';
 
 import '../components';
 
+const syntaxLanguagesPath = path.join(
+  __dirname,
+  '..',
+  '..',
+  'syntax-languages.txt',
+);
+const syntaxLanguages = fs.readFileSync(syntaxLanguagesPath);
+
 const templateText = fs.readFileSync(
   path.join(__dirname, '..', '..', 'highlight.html'),
 );
@@ -120,8 +128,7 @@ router.get('/:stringId/:option*', async ctx => {
     if (share.paste) {
       if (option) {
         if (!Prism.languages[option]) {
-          ctx.body =
-            'language not found https://prismjs.com/index.html#supported-languages';
+          ctx.body = `language not found\n\n${syntaxLanguages}`;
           ctx.status = 500;
           return;
         }

@@ -37,6 +37,8 @@ yarn
 
 Edit the config file. You can rename .env.example to .env and edit the values.
 
+You should proxy this with nginx or apache. There is a config [here](nginx.conf).
+
 ### Edit API Config
 
 ```ini
@@ -58,6 +60,8 @@ THUMBNAIL_SIZE = "64"
 ```
 
 ### Import ShareX configs
+
+The ShareX configurations are [here](sxcu). You need to import these into ShareX.
 
 ![Import ShareX configs](readme/sharex-import.png)
 

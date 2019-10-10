@@ -6,7 +6,11 @@ const knexConfig = require('../knexfile');
 
 const knex = Knex(knexConfig);
 
-// knex.migrate.latest();
+const isDev = process.env.NODE_ENV !== 'production';
+
+if (!isDev) {
+  knex.migrate.latest();
+}
 
 Model.knex(knex);
 

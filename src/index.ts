@@ -2,6 +2,7 @@ import Koa from 'koa';
 import serve from 'koa-static';
 import path from 'path';
 import mount from 'koa-mount';
+import fs from 'fs-extra';
 
 import './env';
 import './knex';
@@ -17,18 +18,21 @@ const app = new Koa();
 
 const isDev = process.env.NODE_ENV !== 'production';
 
+const imagesDir = path.join(__dirname, '..', 'uploads', 'images');
+const thumbsDir = path.join(__dirname, '..', 'uploads', 'thumbnails');
+const filesDir = path.join(__dirname, '..', 'uploads', 'files');
+
+fs.ensureDirSync(imagesDir);
+fs.ensureDirSync(thumbsDir);
+fs.ensureDirSync(filesDir);
+
 if (isDev) {
   app.use(serve(path.join(__dirname, '..', 'public')));
 
-  app.use(serve(path.join(__dirname, '..', 'uploads', 'images')));
-  app.use(serve(path.join(__dirname, '..', 'uploads', 'files')));
+  app.use(serve(imagesDir));
+  app.use(serve(filesDir));
 
-  app.use(
-    mount(
-      '/thumbnails',
-      serve(path.join(__dirname, '..', 'uploads', 'thumbnails')),
-    ),
-  );
+  app.use(mount('/thumbnails', serve(thumbsDir)));
 
   app.use(mount('/css', serve(path.join(__dirname, '..', 'uploads', 'css'))));
 }

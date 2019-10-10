@@ -120,10 +120,10 @@ The languages are listed [here](syntax-languages.txt).
 Snag your delete url from ShareX. Navigate to the url. The page will give you a code. Append a trailing slash and the code it gives you to complete deletion.
 
 - Load page
-  - ``example.com/delete/abcd``
+  - ``example.com/api/delete/abcd``
 - Get code (the response)
 - Load page with code appended.
-  - ``example.com/delete/abcd/efgh``
+  - ``example.com/api/delete/abcd/efgh``
 - Deleted.
 
 ## Screenshots

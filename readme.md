@@ -26,13 +26,25 @@ This is a Node.js API for ShareX. This is ideal if you want to use ShareX with y
 Clone the repository.
 
 ```bash
-git clone https://github.com/busheezy/ts-sharex-api
+git clone https://github.com/busheezy/node-ts-sharex-api
+```
+
+Navigate inside of the directory.
+
+```bash
+cd node-ts-sharex-api
 ```
 
 Install the dependencies.
 
 ```bash
 yarn
+```
+
+Run the database migration.
+
+```bash
+yarn migrate
 ```
 
 Edit the config file. You can rename .env.example to .env and edit the values.

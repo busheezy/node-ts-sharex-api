@@ -139,6 +139,7 @@ router.get('/:stringId/:option*', async ctx => {
 
         ctx.body = compiledTemplate;
       } else {
+        ctx.type = 'text/plain; charset=utf-8';
         ctx.body = share.paste.content;
       }
     }

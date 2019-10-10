@@ -71,11 +71,15 @@ Edit the request and response tab for every configuration to reflect your domain
 pm2 start
 ```
 
+or
+
 ### yarn
 
 ```bash
 yarn start
 ```
+
+or
 
 ### node
 

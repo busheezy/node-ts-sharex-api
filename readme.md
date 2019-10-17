@@ -41,6 +41,12 @@ Install the dependencies.
 yarn
 ```
 
+Build the project
+
+```bash
+yarn build
+```
+
 Run the database migration.
 
 ```bash

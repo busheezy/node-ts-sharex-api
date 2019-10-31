@@ -24,6 +24,7 @@ const bodyParser = BodyParser({
   formidable: {
     uploadDir,
     maxFieldsSize: 1024 * 1024 * 1024,
+    maxFileSize: 1024 * 1024 * 1024,
   },
   jsonLimit: '1gb',
   formLimit: '1gb',

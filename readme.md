@@ -63,20 +63,20 @@ You should proxy this with nginx or apache. There is a config [here](nginx.conf)
 
 ```ini
 # MySQL database auth information.
-DB_NAME = "sharex"
-DB_HOST = "localhost"
-DB_USERNAME = "sharex"
-DB_PASSWORD = ""
+DB_NAME=sharex
+DB_HOST=localhost
+DB_USERNAME=sharex
+DB_PASSWORD=
 
 # This is the API Key we validate ShareX calls with.
-API_KEY = "hunter1"
+API_KEY=hunter1
 
 # The Discord webhook URL is for discord loggging via the ShareX "share" feature.
 # It is optional.
-DISCORD_WEBHOOK_URL = ""
+DISCORD_WEBHOOK_URL=
 
 # We autogenerate thumbnails. Choose how many pixels wide or tall it can be.
-THUMBNAIL_SIZE = "64"
+THUMBNAIL_SIZE=64
 ```
 
 ### Import ShareX configs

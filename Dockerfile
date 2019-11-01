@@ -1,4 +1,4 @@
-FROM node:13.0.1-alpine as builder
+FROM node:13.0.1-alpine
 WORKDIR /app
 ARG buildDeps='python make g++'
 RUN apk update \

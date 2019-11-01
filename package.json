@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "lint": "eslint --ext .ts --ignore-path .gitignore .",
-    "precommit": "yarn run lint",
+    "precommit": "yarn lint",
     "lintrc": "eslint --no-ignore .eslintrc.js --fix",
     "migrate": "knex migrate:latest",
     "docker:start": "yarn run migrate && yarn run start"

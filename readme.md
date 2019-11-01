@@ -123,7 +123,7 @@ Use ShareX like normal.
 
 The languages are listed [here](syntax-languages.txt).
 
-## Delete via API.
+## Delete via API
 
 Snag your delete url from ShareX. Navigate to the url. The page will give you a code. Append a trailing slash and the code it gives you to complete deletion.
 
@@ -141,6 +141,12 @@ Snag your delete url from ShareX. Navigate to the url. The page will give you a 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Credits
+
+[Ruto](https://github.com/devruto)
+
+- Docker support
 
 ## License
 

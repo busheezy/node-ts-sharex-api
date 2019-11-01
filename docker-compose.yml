@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    depends_on:
+      - mysqldb
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    volumes:
+      - ./uploads:/app/uploads
+
+  mysqldb:
+    image: mariadb:latest
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - sharex_db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+
+volumes:
+  sharex_db:

@@ -7,7 +7,7 @@ If you want to access **host database** from docker container, the ip should be 
 ## Dockerfile
 ```
 docker build -t sharexapi:latest .
-docker run -v ./uploads:/app/uploads -v ./public/app/public -i -t -p 3000:3000 sharexapi:latest
+docker run -it -v ./uploads:/app/uploads -v ./public/app/public -e API_KEY=hunter1 -p 3000:3000 sharexapi:latest
 ```
 Setup nginx (reference [nginx.conf](./nginx.conf))
 

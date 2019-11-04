@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 import { Context } from 'koa';
-import '../env';
+import env from '../env';
 
-const apiKey = process.env.API_KEY;
+const { apiKey } = env;
 
 export default async (ctx: Context, next: Function): Promise<void> => {
   const hasHeaders = _.hasIn(ctx, ['request', 'headers', 'x-api-key']);

@@ -4,7 +4,7 @@ import path from 'path';
 import mount from 'koa-mount';
 import fs from 'fs-extra';
 
-import './env';
+import env from './env';
 import './knex';
 
 import routes from './routes/index';
@@ -16,7 +16,7 @@ import routesLinkShare from './routes/linkShare';
 
 const app = new Koa();
 
-const isDev = process.env.NODE_ENV !== 'production';
+const isDev = env.nodeEnv !== 'production';
 
 const imagesDir = path.join(__dirname, '..', 'uploads', 'images');
 const thumbsDir = path.join(__dirname, '..', 'uploads', 'thumbnails');
@@ -44,8 +44,8 @@ app.use(routesLinks.routes());
 app.use(routesLinkShare.routes());
 app.use(routes.routes());
 
-const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-const host = process.env.HOST || '0.0.0.0';
+const port = env.port ? parseInt(env.port, 10) : 3000;
+const host = env.host || '0.0.0.0';
 
 app.listen(port, host, () => {
   if (process.send) {

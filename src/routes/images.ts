@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import sharp from 'sharp';
 import { transaction } from 'objection';
-import '../env';
+import env from '../env';
 import randomString from '../randomString';
 
 import apiKeyMiddleware from '../middleware/apiKey';
@@ -38,7 +38,7 @@ router.post('/api/images', apiKeyMiddleware, bodyParser, async ctx => {
     const { image } = files;
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const thumbnailSize = parseInt(process.env.THUMBNAIL_SIZE!, 10) || 64;
+    const thumbnailSize = parseInt(env.thumbnailSize!, 10) || 64;
 
     const thumbnail = await sharp(image.path)
       .resize(thumbnailSize)

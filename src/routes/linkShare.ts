@@ -4,11 +4,11 @@ import Router from 'koa-router';
 import BodyParser from 'koa-body';
 import apiKeyMiddleware from '../middleware/apiKey';
 
-import '../env';
+import env from '../env';
 
 const bodyParser = BodyParser();
 
-const webhookURL = process.env.DISCORD_WEBHOOK_URL;
+const webhookURL = env.discordWebhookUrl;
 
 const router = new Router();
 

@@ -14,6 +14,8 @@ import routesPastes from './routes/pastes';
 import routesLinks from './routes/links';
 import routesLinkShare from './routes/linkShare';
 
+import './generateSXCU';
+
 const app = new Koa();
 
 const isDev = env.nodeEnv !== 'production';

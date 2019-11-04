@@ -13,6 +13,9 @@ const env = {
   apiKey: process.env.API_KEY,
   thumbnailSize: process.env.THUMBNAIL_SIZE,
   discordWebhookUrl: process.env.DISCORD_WEBHOOK_URL,
+  sxcu: process.env.SXCU,
+  uploadUrl: process.env.UPLOAD_URL,
+  returnUrl: process.env.RETURN_URL,
 };
 
 export default env;

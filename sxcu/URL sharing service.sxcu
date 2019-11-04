@@ -1,6 +1,6 @@
 ﻿{
   "Version": "13.0.1",
-  "Name": "Node API - Link Share",
+  "Name": "URL sharing service",
   "DestinationType": "URLSharingService",
   "RequestMethod": "POST",
   "RequestURL": "https://your.url/api/link-share",

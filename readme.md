@@ -77,6 +77,15 @@ DISCORD_WEBHOOK_URL=
 
 # We autogenerate thumbnails. Choose how many pixels wide or tall it can be.
 THUMBNAIL_SIZE=64
+
+# Enable automatic SXCU (ShareX config) file generation
+# Outputs to /sxcu_generated
+SXCU=true
+# The url used to talk to the API.
+UPLOAD_URL=http://localhost:3000
+# The url used for sharing.
+# Enter the same as UPLOAD_URL for a standard configuration.
+RETURN_URL=http://localhost:3000
 ```
 
 ### Import ShareX configs

@@ -1,14 +1,14 @@
 ﻿{
   "Version": "13.0.1",
-  "Name": "Node API - Links",
-  "DestinationType": "URLShortener",
+  "Name": "File uploader",
+  "DestinationType": "FileUploader",
   "RequestMethod": "POST",
-  "RequestURL": "https://your.url/api/links",
+  "RequestURL": "https://your.url/api/files",
   "Headers": {
     "X-API-Key": "hunter1"
   },
-  "Body": "JSON",
-  "Data": "{\n  \"url\": \"$input$\"\n}",
+  "Body": "MultipartFormData",
+  "FileFormName": "file",
   "URL": "https://your.url/$json:url$",
   "DeletionURL": "https://your.url/$json:delete$"
 }

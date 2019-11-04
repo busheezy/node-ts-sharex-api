@@ -1,15 +1,14 @@
 ﻿{
   "Version": "13.0.1",
-  "Name": "Node API - Image",
-  "DestinationType": "ImageUploader",
+  "Name": "Text uploader",
+  "DestinationType": "TextUploader",
   "RequestMethod": "POST",
-  "RequestURL": "https://your.url/api/images",
+  "RequestURL": "https://your.url/api/pastes",
   "Headers": {
     "X-API-Key": "hunter1"
   },
   "Body": "MultipartFormData",
-  "FileFormName": "image",
+  "FileFormName": "paste",
   "URL": "https://your.url/$json:url$",
-  "ThumbnailURL": "https://your.url/$json:thumbnail$",
   "DeletionURL": "https://your.url/$json:delete$"
 }

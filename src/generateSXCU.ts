@@ -51,7 +51,7 @@ async function generate(): Promise<void> {
   });
 }
 
-if (env.sxcu) {
+if (env.sxcu === 'true') {
   generate().catch(err => {
     console.error('error generating configs');
     console.error(err);

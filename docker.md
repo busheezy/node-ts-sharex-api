@@ -10,8 +10,8 @@ The steps to do so are:
     - `/home/myuser/docker/letsencrypt/config` - This will be the volume for letsencrypt/nginx/fail2ban configuration.
 
 - Adjust the docker-compose file with the following:
-    - **Userid and groupid of the services to your docker user's**.
-    - `letsencrypt` - 
+    - **Userid and groupid of the services to your docker user**.
+    - `letsencrypt`
         - `URL` - Domain you wish to use.
         - `PUID` - Userid of your Docker user.
         - `PGID` - Groupid of your Docker user.
@@ -26,7 +26,7 @@ The steps to do so are:
         - `DB_PASSWORD` - The password you chose for `MYSQL_PASSWORD` of `mariadb`.
         - `API_KEY` - This is your "password" to upload content to your server, choose something strong.
 
-- Lastly, do the following for `docker-share.my.domain.conf`:
+- Lastly, do the following for [`docker-share.my.domain.conf`](./docker-share.my.domain.conf):
     - Replace `server_name` directives with your (sub)domain.
     - Save it to `/home/myuser/docker/letsencrypt/config/nginx/site-confs/`.
 

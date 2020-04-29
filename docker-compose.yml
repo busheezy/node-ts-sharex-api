@@ -1,29 +1,71 @@
-version: '3'
-
-services:
-  api:
-    build: .
-    depends_on:
-      - mysqldb
-    env_file:
-      - .env
-    ports:
-      - 3000:3000
-    volumes:
-      - ./uploads:/app/uploads
-
-  mysqldb:
-    image: mariadb:latest
-    restart: always
-    env_file:
-      - .env
-    volumes:
-      - sharex_db:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
+version: "2.1"
 
 volumes:
-  sharex_db:
+  public:  
+    
+networks:
+  backbone:
+    driver: bridge
+
+services:
+
+  letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: letsencrypt
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - backbone
+    environment:
+      - PUID=1000 # Adjust this to your docker user!
+      - PGID=1000 # Adjust this to your docker user!
+      - URL=share.my.domain
+      - SUBDOMAINS=www,
+      - VALIDATION=http
+    volumes:
+      - public:/sharex/public
+      - /home/myuser/docker/sharex/uploads:/sharex/uploads
+      - /home/myuser/docker/letsencrypt/config:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+
+  mariadb:
+    image: linuxserver/mariadb
+    container_name: mariadb
+    networks:
+      - backbone
+    environment:
+      - PUID=1000 # Adjust this to your docker user!
+      - PGID=1000 # Adjust this to your docker user!
+      - MYSQL_DATABASE=sharex
+      - MYSQL_USER=sharex
+      - MYSQL_PASSWORD=very_secure_password
+      - MYSQL_ROOT_PASSWORD=extremely_secure_password
+    volumes:
+      - /home/myuser/docker/mariadb/config:/config
+    expose:
+      - 3306
+    restart: unless-stopped
+
+  api:
+    image: busheezy/node-ts-sharex-api
+    container_name: sharex
+    user: 1000:1000 # Adjust this to your docker user!
+    networks:
+      - backbone
+    depends_on:
+      - mariadb
+    environment:
+      - DB_NAME=sharex
+      - DB_HOST=mariadb
+      - DB_USERNAME=sharex
+      - DB_PASSWORD=very_secure_password
+      - API_KEY=hunter1_please_change_this
+    expose:
+      - 3000
+    volumes:
+      - public:/app/public
+      - /home/myuser/docker/sharex/uploads:/app/uploads
+    restart: unless-stopped

@@ -29,7 +29,7 @@
     "lodash": "^4.17.15",
     "mysql2": "^1.7.0",
     "objection": "^1.6.11",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.23.0",
     "sharp": "^0.23.1"
   },
   "devDependencies": {
